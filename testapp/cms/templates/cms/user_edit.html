@@ -1,0 +1,24 @@
+{% extends "cms/base.html" %}
+{% load bootstrap4 %}
+
+{% block title %}ユーザーの編集{% endblock title %}
+
+{% block content %}
+<h4 class="mt-4 mb-5 border-bottom">ユーザーの編集</h4>
+{% if user_id %}
+<form action="{% url 'cms:user_mod' user_id=user_id %}" method="post">
+  {% else %}
+  <form action="{% url 'cms:user_add' %}" method="post">
+      {% endif %}
+      {% csrf_token %}
+      <div class="container">
+        <div class="form-group row">
+          <div class="col-md-6">
+            {% bootstrap_form form layout='horizontal' %}
+            <button type="submit" class="btn btn-primary">送信</button>
+            <a href="{% url 'cms:user_list' %}" class="btn btn-secondary">戻る</a>
+          </div>
+        </div>
+      </form>  
+    </div>
+  {% endblock content %}
